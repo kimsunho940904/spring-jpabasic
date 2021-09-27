@@ -116,6 +116,8 @@ public class JpaMain {
 //        // detach를 쓰면, jpa에서 더이상 관리하지 않는다. (영속성 컨텍스트에서 제외)
 //        em.detach(member);
 
+
+
         //커밋
         tx.commit();
 
