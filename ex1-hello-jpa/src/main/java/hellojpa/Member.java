@@ -9,6 +9,7 @@ import java.util.Date;
 public class Member {
 
     @Id //-> PK
+    @GeneratedValue(strategy = GenerationType.AUTO) // -> AUTO INCREMENT와 같은 기능.
     private Long id;
     //    @Column(unique = true, length = 255) -> 제약조건을 줄 수 있다.
     @Column(name = "name") // -> DB Column = name으로 들어간다.
