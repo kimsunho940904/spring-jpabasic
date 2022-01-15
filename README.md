@@ -1,4 +1,5 @@
-## # 
+# 자바 ORM 표준 JPA 
+## # 정석 코드
 
 <pre>
 package hellojpa;
