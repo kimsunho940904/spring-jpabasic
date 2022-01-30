@@ -16,9 +16,9 @@ public class JpaMain {
         tx.begin();
 
         try {
-
             Team team = new Team();
             team.setName("teamA");
+//            team.getMembers().add(member);
             em.persist(team);
 
             Member member = new Member();
@@ -29,12 +29,6 @@ public class JpaMain {
             em.flush(); // -> 영속성 컨텍스트에 있는것들을 디비에 다 날린후, 싱크를 맞추고
             em.clear(); // -> 영속성 컨텍스트를 초기화
 
-            Member findMember = em.find(Member.class, member.getId());
-            List<Member> members = findMember.getTeam().getMembers(); // -> 양방향 연관관계! 멤버에서 팀으로, 팀에서 다시 멤버로!
-
-            for (Member m : members) {
-                System.out.println("m.getUsername() = " + m.getUsername());
-            }
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
