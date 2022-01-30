@@ -2,23 +2,31 @@ package jpabook.jpashop.domain;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "order_id")
+    @Column(name = "ORDER_ID")
     private Long id;
-    @Column(name = "member_id")
-    private Long memberId;
+
+    @ManyToOne // -> 주문한 회원은 한명이니까!
+    @JoinColumn(name = "MEMBER_ID")
     private Member member;
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems = new ArrayList<>();
+
     private LocalDateTime orderDate;
+
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    public Member getMember() {
-        return member;
+    public void addOrderItem(OrderItem orderItem) {
+        orderItems.add(orderItem); // -> 넘어온 orderItem 집어 넣고,
+        orderItem.setOrder(this); // -> 현재 나의 order(this)를 넣어준다.
     }
 
     public Long getId() {
@@ -29,12 +37,12 @@ public class Order {
         this.id = id;
     }
 
-    public Long getMemberId() {
-        return memberId;
+    public Member getMember() {
+        return member;
     }
 
-    public void setMemberId(Long memberId) {
-        this.memberId = memberId;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
     public LocalDateTime getOrderDate() {
@@ -52,4 +60,6 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+
+
 }
