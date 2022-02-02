@@ -8,16 +8,16 @@ import java.util.List;
 public class Member {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "MEMBER_ID")
     private Long id;
     private String name;
     private String city;
     private String street;
     private String zipcode;
-    @OneToMany(mappedBy = "member")
+    //    @OneToMany(mappedBy = "member")
+    @OneToMany
     private List<Order> orders = new ArrayList<>();
-
 
 
     public Long getId() {
