@@ -16,18 +16,15 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-//            team.getMembers().add(member);
-            em.persist(team);
-
             Member member = new Member();
-            member.setUsername("memberA");
-            member.setTeam(team);
+            member.setUsername("userA");
             em.persist(member);
 
-            em.flush(); // -> 영속성 컨텍스트에 있는것들을 디비에 다 날린후, 싱크를 맞추고
-            em.clear(); // -> 영속성 컨텍스트를 초기화
+            Team team = new Team();
+            team.setName("teamA");
+            team.getMembers().add(member);
+
+            em.persist(team);
 
             tx.commit();
         } catch (Exception e) {

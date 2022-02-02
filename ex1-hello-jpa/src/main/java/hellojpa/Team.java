@@ -11,7 +11,8 @@ public class Team {
     @Column(name = "TEAM_ID")
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "team") // -> 나는 팀에 의해서 관리가 된다. 읽기만 가능
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID")
     private List<Member> members = new ArrayList<>();
 
     public List<Member> getMembers() {
