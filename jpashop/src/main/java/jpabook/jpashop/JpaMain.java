@@ -1,9 +1,6 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.OrderItem;
-import jpabook.jpashop.domain.OrderStatus;
+import jpabook.jpashop.domain.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -19,28 +16,10 @@ public class JpaMain {
         tx.begin();
 
         try {
-//            같은 코드
-//            Order order = new Order();
-//            em.persist(order);
-//
-//            OrderItem orderItem = new OrderItem();
-//            orderItem.setOrder(order);
-//            em.persist(orderItem);
-
-            Member member = new Member();
-            member.setName("kimsunho");
-            member.setCity("seoul");
-            member.setStreet("12345");
-            member.setZipcode("1234444444");
-
-            Order order = new Order();
-            order.addOrderItem(new OrderItem());
-            order.setMember(member);
-            order.setStatus(OrderStatus.ORDER);
-            order.setOrderDate(LocalDateTime.now());
-            em.persist(member);
-            em.persist(order);
-
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {
