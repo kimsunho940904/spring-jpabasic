@@ -26,13 +26,14 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member m1 = em.find(Member.class, member1.getId());
-//            Member m2 = em.find(Member.class, member2.getId());
-            Member m2 = em.getReference(Member.class,member2.getId());
-            // true
-//            System.out.println("m1 == m2" + (m1.getClass() == m2.getClass()));
+            Member reference = em.getReference(Member.class, member1.getId());
+            System.out.println("reference.getClass() = " + reference.getClass()); // Proxy
 
-            logic(m1,m2);
+            Member findMember = em.find(Member.class, member1.getId());
+            System.out.println("findMember.getClass() = " + findMember.getClass()); // Member
+            // jpa 에서는 어떻게든 프록시와 객체의 true를 맞춘다.
+            System.out.println("reference == findMember = " + (reference == findMember));
+
 
             tx.commit();
         } catch (Exception e) {
@@ -43,8 +44,4 @@ public class JpaMain {
         emf.close();
     }
 
-    private static void logic(Member m1, Member m2) {
-        System.out.println("m1 == m2" + (m1 instanceof Member));
-        System.out.println("m1 == m2" + (m2 instanceof Member));
-    }
 }
