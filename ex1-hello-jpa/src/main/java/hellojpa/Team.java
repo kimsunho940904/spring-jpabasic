@@ -13,8 +13,6 @@ public class Team extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "team")
-//    @OneToMany
-//    @JoinColumn(insertable = false, updatable = false)
     private List<Member> members = new ArrayList<>();
 
     public List<Member> getMembers() {
