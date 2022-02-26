@@ -15,21 +15,12 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            em.persist(member1);
-
-
-            em.flush();
-            em.clear();
-
-            Member m = em.find(Member.class, member1.getId());
-            System.out.println("m = ");
-
+            Member member = new Member();
+            member.setUsername("memberA");
+            member.setHomeAddress(new Address("city", "street", "10000"));
+            member.setWorkPeriod(new Period());
+            em.persist(member);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
