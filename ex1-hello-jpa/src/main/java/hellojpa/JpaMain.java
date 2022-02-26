@@ -15,25 +15,20 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
             Member member1 = new Member();
             member1.setUsername("member1");
             em.persist(member1);
 
-            Member member2 = new Member();
-            member2.setUsername("member2");
-            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            Member reference = em.getReference(Member.class, member1.getId());
-            System.out.println("reference.getClass() = " + reference.getClass()); // Proxy
-
-            Member findMember = em.find(Member.class, member1.getId());
-            System.out.println("findMember.getClass() = " + findMember.getClass()); // Member
-            // jpa 에서는 어떻게든 프록시와 객체의 true를 맞춘다.
-            System.out.println("reference == findMember = " + (reference == findMember));
-
+            Member m = em.find(Member.class, member1.getId());
+            System.out.println("m = ");
 
             tx.commit();
         } catch (Exception e) {

@@ -11,10 +11,9 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID") // -> 연관관계 주인이 아니게 등록,수정 불가능하게
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     private Team team;
-
 
     public Long getId() {
         return id;
@@ -30,6 +29,14 @@ public class Member extends BaseEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
 
